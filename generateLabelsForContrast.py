@@ -32,7 +32,6 @@ def construct_txt(path):
         text = ''
         for cone in images[imgIndex]:
             text += f'{cone.color} {cone.x_centre} {cone.y_centre} {cone.x_width} {cone.y_height}\n'
-            os.remove(cone)
             
         with open(f'{path}/{imgIndex}.txt', 'w') as txt_file:
             txt_file.write(text)
@@ -74,6 +73,7 @@ def recursiveFind(path):
     for file in os.listdir(path):
         if file.endswith('.png') and file.count('_')>=1:            
             operateImage(f'{path}/{file}')
+            os.remove(f'{path}/{file}')
         elif not file.count('.'):
             recursiveFind(f'{path}/{file}')
 
