@@ -37,7 +37,6 @@ def construct_txt(path):
             txt_file.write(text)
     
 def operateImage(path):
-    print(path)
     image = cv2.imread(path)
     pixels = np.argwhere(image == 255)  #Record the positions of all the white pixels
     minY = min(pixels[:,0]) #MINIMUM Y COORDINATE 
