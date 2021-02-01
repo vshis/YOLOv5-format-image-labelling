@@ -39,31 +39,34 @@ def construct_txt(path):
 def operateImage(path):
     image = cv2.imread(path)
     pixels = np.argwhere(image == 255)  #Record the positions of all the white pixels
-    minY = min(pixels[:,0]) #MINIMUM Y COORDINATE 
-    maxY = max(pixels[:,0]) #MAX Y COORDINATE 
-    minX = min(pixels[:,1]) #MINIMUM X cord
-    maxX = max(pixels[:,1]) #MAX X cord
-    
-    centreY = (minY+maxY)/2
-    centreX = (minX+maxX)/2
-    height = maxY - minY
-    width = maxX - minX
-    
-    #YOLO FORMATTING
-    centreYoloY = centreY/imageSize[1]
-    centreYoloX = centreX/imageSize[0]
-    heightYolo = height/imageSize[1]
-    widthYolo = width/imageSize[0]
-    
-    if path.count('blue'):
-        color = Color.BLUE
-    elif path.count('orange'):
-        color = Color.ORANGE
-    else:
-        color = Color.YELLOW
-    
-    imgIndex = path.split('/')[-1].split('_')[0]
-    massiv.append(Cone(color, centreYoloX, centreYoloY, widthYolo, heightYolo, imgIndex))
+    if pixels.size == 0:
+        print("Cone out of image bounds.")
+    else:        
+        minY = min(pixels[:,0]) #MINIMUM Y COORDINATE 
+        maxY = max(pixels[:,0]) #MAX Y COORDINATE 
+        minX = min(pixels[:,1]) #MINIMUM X cord
+        maxX = max(pixels[:,1]) #MAX X cord
+        
+        centreY = (minY+maxY)/2
+        centreX = (minX+maxX)/2
+        height = maxY - minY
+        width = maxX - minX
+        
+        #YOLO FORMATTING
+        centreYoloY = centreY/imageSize[1]
+        centreYoloX = centreX/imageSize[0]
+        heightYolo = height/imageSize[1]
+        widthYolo = width/imageSize[0]
+        
+        if path.count('blue'):
+            color = Color.BLUE
+        elif path.count('orange'):
+            color = Color.ORANGE
+        else:
+            color = Color.YELLOW
+        
+        imgIndex = path.split('/')[-1].split('_')[0]
+        massiv.append(Cone(color, centreYoloX, centreYoloY, widthYolo, heightYolo, imgIndex))
     
     
     #To show the modified image
