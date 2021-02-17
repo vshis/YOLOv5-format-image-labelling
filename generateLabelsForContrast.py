@@ -21,7 +21,7 @@ class Color:
     YELLOW = 2
 
 
-def construct_txt(path):
+def construct_txt(path):      
     images = {}
     for cone in massiv:
         if not images.get(cone.imgIndex):
@@ -31,16 +31,22 @@ def construct_txt(path):
     for imgIndex in images:
         text = ''
         for cone in images[imgIndex]:
-            text += f'{cone.color} {cone.x_centre} {cone.y_centre} {cone.x_width} {cone.y_height}\n'
-            
+            if cone.color == None:
+                text = text
+            else:
+                text += f'{cone.color} {cone.x_centre} {cone.y_centre} {cone.x_width} {cone.y_height}\n'
+        
         with open(f'{path}/{imgIndex}.txt', 'w') as txt_file:
             txt_file.write(text)
+
     
 def operateImage(path):
     image = cv2.imread(path)
     pixels = np.argwhere(image == 255)  #Record the positions of all the white pixels
-    if pixels.size == 0:
+    if pixels.size == 0: 
         print("Cone out of image bounds.")
+        imgIndex = path.split('/')[-1].split('_')[0]
+        massiv.append(Cone(None, None, None, None, None, imgIndex))
     else:        
         minY = min(pixels[:,0]) #MINIMUM Y COORDINATE 
         maxY = max(pixels[:,0]) #MAX Y COORDINATE 
@@ -81,6 +87,7 @@ def recursiveFind(path):
 
 if __name__ == '__main__':
     mainPath = 'C:/apps/synthConesTest/captures'
+    #mainPath = 'C:/apps/ss'
     recursiveFind(mainPath)
     construct_txt(mainPath)
 
