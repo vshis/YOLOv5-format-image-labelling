@@ -7,6 +7,7 @@ The white pixels on black background represent the visible region of a cone. A l
 For every image with multiple cones on it, black/white images of individual cones are generated. This code outputs a .txt of all cones file per main image. 
 For images with no cones on them, empty .txt files are generated. 
 
+
 List of Unity Asset Store assets used in this project: 
 • Traffic cones - https://assetstore.unity.com/packages/3d/props/traffic-cones-34912
 • Ground materials - https://assetstore.unity.com/packages/2d/textures-materials/floors/yughues-free-ground-materials-13001
