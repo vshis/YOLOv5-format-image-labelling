@@ -74,8 +74,6 @@ def operateImage(path):
         imgIndex = path.split('/')[-1].split('_')[0]
         massiv.append(Cone(color, centreYoloX, centreYoloY, widthYolo, heightYolo, imgIndex))
     
-    
-    #To show the modified image
 
 def recursiveFind(path):
     for file in os.listdir(path):
